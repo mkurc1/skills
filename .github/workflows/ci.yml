@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --locked
+      - run: uv run ruff check tests/
+      - run: uv run ruff format --check tests/
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --locked
+      - run: uv run pytest
+
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install every skill into an empty repository
+        run: |
+          target="$(mktemp -d)"
+          git -C "$target" init -q
+          cd "$target"
+          npx -y skills add "$GITHUB_WORKSPACE" --skill '*' --agent claude-code -y
+          count=$(find .claude/skills -mindepth 2 -maxdepth 2 -name SKILL.md | wc -l)
+          echo "installed: $count"
+          test "$count" -eq 11

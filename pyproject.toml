@@ -1,0 +1,52 @@
+[project]
+name = "ba-skills"
+version = "0.0.0"
+description = "Tests for the ba-* agent skills"
+requires-python = ">=3.13"
+
+[dependency-groups]
+dev = [
+    "pytest>=8,<10",
+    "pyyaml>=6,<7",
+    "ruff>=0.8,<1",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "F",    # pyflakes
+    "I",    # isort
+    "W",    # pycodestyle warnings
+    "UP",   # pyupgrade
+    "B",    # flake8-bugbear
+    "SIM",  # flake8-simplify
+    "RUF",  # ruff-specific rules
+    "S",    # flake8-bandit
+    "PL",   # pylint
+    "PERF", # perflint
+    "PTH",  # flake8-use-pathlib
+    "PT",   # flake8-pytest-style
+    "RET",  # flake8-return
+    "PIE",  # flake8-pie
+    "ISC",  # flake8-implicit-str-concat
+    "TRY",  # tryceratops
+    "ERA",  # eradicate: commented-out code
+    "T20",  # flake8-print
+]
+ignore = [
+    "E501",    # line too long (handled by the formatter)
+    "PLR2004", # magic value comparison: tests compare against literal counts and exit codes
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S101"]
