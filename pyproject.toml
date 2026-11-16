@@ -39,6 +39,9 @@ select = [
     "RET",  # flake8-return
     "PIE",  # flake8-pie
     "ISC",  # flake8-implicit-str-concat
+    "TRY",  # tryceratops
+    "ERA",  # eradicate: commented-out code
+    "T20",  # flake8-print
 ]
 ignore = [
     "E501",    # line too long (handled by the formatter)

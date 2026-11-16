@@ -1,6 +1,12 @@
 # skills
 
-Skille `ba-*` prowadzą zadanie z GitHub Issues od pomysłu do PR-a z zielonymi checkami. Działają z Claude Code, Codex i innymi agentami, które czytają `SKILL.md`.
+Skille `ba-*` prowadzą zadanie z GitHub Issues od pomysłu do PR-a z zielonymi checkami. Agent czyta je z plików `SKILL.md`.
+
+## Wymagania
+
+- `gh`, czyli CLI GitHuba, zalogowane do repozytorium. Używają go skille issue i PR-ów.
+- Plugin `code-review` z Claude Code. Na nim stoi lokalne review w `ba-ship-pr`.
+- Narzędzia przeglądarki Playwright MCP. Potrzebuje ich tylko `ba-qa`.
 
 ## Instalacja
 
