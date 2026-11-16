@@ -41,7 +41,8 @@ select = [
     "ISC",  # flake8-implicit-str-concat
 ]
 ignore = [
-    "E501", # line too long (handled by the formatter)
+    "E501",    # line too long (handled by the formatter)
+    "PLR2004", # magic value comparison: tests compare against literal counts and exit codes
 ]
 
 [tool.ruff.lint.per-file-ignores]
