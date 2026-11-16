@@ -1,6 +1,6 @@
 ---
 name: ba-wait-checks
-description: Use right after pushing a branch that has an open GitHub pull request, before reporting its state — waits for every check on the latest commit and for any human review the pull request is waiting on, then reports each result as GitHub gives it, never a prediction. Judges every red check (branch fault or would the main branch fail too). Called by ba-ship-pr after each push; also runnable alone as /ba-wait-checks [<pr>]. Read-only: never fixes, pushes or replies.
+description: "Use right after pushing a branch that has an open GitHub pull request, before reporting its state — waits for every check on the latest commit and for any human review the pull request is waiting on, then reports each result as GitHub gives it, never a prediction. Judges every red check (branch fault or would the main branch fail too). Called by ba-ship-pr after each push; also runnable alone as /ba-wait-checks [<pr>]. Read-only: never fixes, pushes or replies."
 ---
 
 # /ba-wait-checks — wynik każdego sprawdzenia PR-a

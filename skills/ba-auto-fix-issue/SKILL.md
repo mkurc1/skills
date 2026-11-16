@@ -1,6 +1,6 @@
 ---
 name: ba-auto-fix-issue
-description: Use ONLY when the user explicitly runs /ba-auto-fix-issue <issue number> or directly asks to carry out a GitHub issue end to end on its own ("zrób issue 123 automatem", "zrealizuj issue sam"). It runs the building-block skills: ba-github-issues start (claims the issue first) → ba-plan → ba-implement → ba-ship-pr. ba-plan reads the docs, checks the issue has everything it needs and asks the user once about missing data and open decisions; after that the chain works alone up to the PR, stopping only on the listed blockers. Running it is the user's explicit consent for commit, push and PR creation through ba-ship-pr. Never auto-invoke it from repo state or from a plain "zacznij issue 123".
+description: 'Use ONLY when the user explicitly runs /ba-auto-fix-issue <issue number> or directly asks to carry out a GitHub issue end to end on its own ("zrób issue 123 automatem", "zrealizuj issue sam"). It runs the building-block skills: ba-github-issues start (claims the issue first) → ba-plan → ba-implement → ba-ship-pr. ba-plan reads the docs, checks the issue has everything it needs and asks the user once about missing data and open decisions; after that the chain works alone up to the PR, stopping only on the listed blockers. Running it is the user''s explicit consent for commit, push and PR creation through ba-ship-pr. Never auto-invoke it from repo state or from a plain "zacznij issue 123".'
 ---
 
 # /ba-auto-fix-issue — issue od numeru do PR-a
