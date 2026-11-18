@@ -21,3 +21,12 @@ Plan: [`.ai/specs/2026-11-18-agents-md-rules-plan.md`](../specs/2026-11-18-agent
 - Mutacja testu: 5 mutacji, każda daje czerwień właściwego testu.
   - stare zdanie w `code-review.md`, nagłówek `## Katalog AI`, brak `@AGENTS.md` w `CLAUDE.md`, `uv run` w § Bramka jakości, wiersz CI bez ścieżki.
 - Druga droga: skrypt sprawdził każdą ścieżkę i link w `AGENTS.md` i każdą sekcję `project.md`, do której odsyła. Brakują tylko celowo nieistniejące: `.ai/lessons/`, `docs/reviews/`, `docs/superpowers/`.
+- Recenzja całej gałęzi (osobny agent): 6 drobnych uwag, nic blokującego. Przyjęte 5.
+  - Test odwołań wymaga 2 odwołań z `ba-ship-pr`, nie z dowolnego pliku. Same specyfikacje spełniały próg.
+  - Test bramki szuka `uv `, nie tylko `uv run`.
+  - `specs/` pisze też `ba-qa` (plany testów).
+  - Reguła „woła tylko przez `## Wywołanie`” przeszła do reguł bez testu. Test łapie tylko odwołania do sekcji i kroków.
+  - Wiersz szablonów `ba-setup` wymienia `tests/test_setup_extra_labels.py`.
+  - Odrzucona: szerszy regex odwołań z kropką jako końcem. Uciąłby nazwę „Katalog `.ai/`”.
+  - Treść `AGENTS.md` odbiega przez to od bloku w planie. Plan zostaje bez zmian, źródłem jest `AGENTS.md`.
+- Bramka po poprawkach zielona: 98 testów.

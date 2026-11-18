@@ -8,6 +8,7 @@ from tests.support.tracked_files import tracked_files
 REPO_ROOT = Path(__file__).resolve().parents[1]
 AGENTS_MD = REPO_ROOT / "AGENTS.md"
 CLAUDE_MD = REPO_ROOT / "CLAUDE.md"
+SHIP_PR_SKILL = Path("skills/ba-ship-pr/SKILL.md")
 CONFIG_FILES = [
     REPO_ROOT / ".ai/config/code-review.md",
     REPO_ROOT / ".ai/config/project.md",
@@ -88,7 +89,7 @@ def test_quality_gate_points_to_project_md() -> None:
     section = _section("Bramka jakości")
 
     assert ".ai/config/project.md" in section
-    assert "uv run" not in section, "gate commands belong in .ai/config/project.md"
+    assert "uv " not in section, "gate commands belong in .ai/config/project.md"
 
 
 def test_agents_md_references_resolve() -> None:
@@ -98,7 +99,8 @@ def test_agents_md_references_resolve() -> None:
         if path.suffix == ".md"
         for name in SECTION_REF.findall(path.read_text(encoding="utf-8"))
     ]
-    assert len(references) >= 2, f"expected at least 2 section references, found {references}"
+    from_ship_pr = [name for path, name in references if path == SHIP_PR_SKILL]
+    assert len(from_ship_pr) >= 2, f"expected 2 references from ba-ship-pr, found {references}"
 
     headings = _headings()
     unresolved = [(str(path), name) for path, name in references if name not in headings]
