@@ -1,11 +1,11 @@
 ---
 name: ba-setup
-description: Use ONLY when the user explicitly runs /ba-setup or asks to set up .ai/config/ for a repository (or another ba-* skill reports missing config files). Inspects the repo, interviews the operator, generates the missing .ai/config/ files and .ai/docs/sdlc.md from templates, never overwrites an existing file silently, creates missing labels with description and color after consent, offers to delete repo labels outside the config after consent, and proposes a commit. Never auto-invoke it.
+description: Use ONLY when the user explicitly runs /ba-setup or asks to set up .ai/config/ for a repository (or another ba-* skill reports missing config files). Inspects the repo, interviews the operator, generates the missing .ai/config/ files and .ai/docs/sdlc.md from templates, adds .ai/scratch/ to .gitignore, never overwrites an existing file silently, creates missing labels with description and color after consent, offers to delete repo labels outside the config after consent, and proposes a commit. Never auto-invoke it.
 ---
 
 # /ba-setup — konfiguracja `.ai/config/` dla repozytorium
 
-Wejście: repozytorium bez kompletu `.ai/config/`. Wynik: 12 plików `.ai/config/` i `.ai/docs/sdlc.md`, etykiety w repo, etykiety spoza konfiguracji skasowane po zgodzie i propozycja commita.
+Wejście: repozytorium bez kompletu `.ai/config/`. Wynik: 12 plików `.ai/config/` i `.ai/docs/sdlc.md`, wpis `.ai/scratch/` w `.gitignore`, etykiety w repo, etykiety spoza konfiguracji skasowane po zgodzie i propozycja commita.
 
 Skill bada repo, pyta operatora o resztę i wypełnia szablony z `references/`. Istniejącego pliku nie nadpisuje bez pytania.
 
@@ -13,7 +13,7 @@ Skill bada repo, pyta operatora o resztę i wypełnia szablony z `references/`. 
 
 | Wywołanie | Co robi | Co zostawia |
 |---|---|---|
-| `/ba-setup` | Bada repo, prowadzi wywiad, generuje brakujące pliki z szablonów, zakłada brakujące etykiety po zgodzie, kasuje etykiety spoza konfiguracji po zgodzie. | Pliki `.ai/config/` i `.ai/docs/sdlc.md` zapisane po akceptacji, etykiety w repo, etykiety spoza konfiguracji skasowane albo zostawione, commit po zgodzie operatora. Bez pusha. |
+| `/ba-setup` | Bada repo, prowadzi wywiad, generuje brakujące pliki z szablonów, zakłada brakujące etykiety po zgodzie, kasuje etykiety spoza konfiguracji po zgodzie. | Pliki `.ai/config/` i `.ai/docs/sdlc.md` zapisane po akceptacji, wpis `.ai/scratch/` w `.gitignore`, etykiety w repo, etykiety spoza konfiguracji skasowane albo zostawione, commit po zgodzie operatora. Bez pusha. |
 
 ## Pliki
 
@@ -48,7 +48,8 @@ Reguły badania repo, pytań i wypełniania szablonów stoją w [`references/int
 4. **Generowanie.** Pliki brakujące, zastępowane i dopisywane sekcje powstają z szablonów w pamięci, jeszcze bez zapisu.
    - Placeholdery wypełniasz według sekcji „Wypełnianie szablonów” w `references/interview.md`.
    - Dopisywana sekcja trafia w miejsce z szablonu albo na koniec pliku. Reszta pliku zostaje bez zmian.
-5. **Podgląd.** Pokaż operatorowi naraz wynik dla plików brakujących, zastępowanych i plików z dopisanymi sekcjami.
+   - Wpis w `.gitignore` przygotowujesz według § Wpis w .gitignore.
+5. **Podgląd.** Pokaż operatorowi naraz wynik dla plików brakujących, zastępowanych, plików z dopisanymi sekcjami i zmiany `.gitignore`.
    - Przy każdej wartości z badania repo podaj jej źródło.
    - Opcje: „zapisz” albo „poprawki”. „Poprawki” wracają do pytania, którego dotyczą.
    - Bez akceptacji nic nie zapisujesz.
@@ -60,7 +61,7 @@ Reguły badania repo, pytań i wypełniania szablonów stoją w [`references/int
    - Gałąź główna albo odłączony HEAD? Najpierw nowa gałąź, na przykład `git switch -c chore/ba-setup`. Na gałęzi głównej nie commitujesz nigdy.
    - Commit robisz tylko na innej gałęzi niż główna, po zgodzie operatora.
    - Wiadomość commita w stylu ostatnich commitów repo (`git log --oneline -10`).
-   - Do commita dodajesz tylko pliki zapisane w kroku 5.
+   - Do commita dodajesz tylko pliki zapisane w kroku 5, także `.gitignore`.
 
    ```bash
    git add <pliki zapisane w kroku 5>
@@ -70,6 +71,7 @@ Reguły badania repo, pytań i wypełniania szablonów stoją w [`references/int
 Na końcu raport dla operatora:
 
 - pliki zapisane, zostawione i uzupełnione o sekcje;
+- wpis `.ai/scratch/` w `.gitignore`: dopisany albo „wpis już jest”;
 - etykiety założone, pominięte i odrzucone jako podejrzane;
 - etykiety spoza konfiguracji skasowane i zostawione, albo „nic do skasowania”;
 - placeholdery do uzupełnienia: plik, sekcja, podpowiedź;
@@ -89,6 +91,23 @@ Plik z tabeli „Pliki” już istnieje. Dotyczy to także `.ai/docs/sdlc.md`.
 | Zastąp | Plik przechodzi przez wywiad jak plik brakujący. Stara treść znika po akceptacji podglądu. |
 
 Nagłówki `## ` w `project.md` to kontrakt ze skillami `ba-*`. Plik bez którejś z tych sekcji psuje skille, które ją czytają. Powiedz to operatorowi przy opcji „Zostaw”.
+
+## Wpis w .gitignore
+
+`ba-ship-pr` zapisuje snapshot i raporty review w `.ai/scratch/`. Pliki z tego katalogu nie mogą wejść do commita. Pilnuje tego wpis `.ai/scratch/` w `.gitignore`.
+
+1. Sprawdź, czy git już ignoruje katalog:
+
+   ```bash
+   git check-ignore -q .ai/scratch/x
+   ```
+
+   - Kod 0: wpis działa. Nic nie zmieniasz. Raport mówi „wpis już jest”.
+2. Inny kod: przygotuj linię `.ai/scratch/` na końcu `.gitignore`. Brak pliku: zakładasz go z tą linią.
+3. Podgląd z kroku 5 pokazuje zmianę `.gitignore`. Zapis idzie po tej samej akceptacji co pliki `.ai/config/`.
+4. Commit z kroku 8 zabiera `.gitignore` razem z plikami `.ai/config/`.
+
+Wpis powstaje także wtedy, gdy wszystkie pliki z tabeli „Pliki” już istnieją. Repo skonfigurowane wcześniej dostaje go przy ponownym uruchomieniu `ba-setup`.
 
 ## Etykiety
 
