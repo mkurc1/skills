@@ -11,7 +11,7 @@ Specyfikacja: [`.ai/specs/2026-11-18-readme-process-diagrams.md`](2026-11-18-rea
 ## Ograniczenia globalne
 
 - Nazwy plików: `01-dwie-drogi`, `02-fix-issue-tory`, `03-decyzje-operatora`, `04-klocki-i-lancuchy`.
-- Render: `npx -y @mermaid-js/mermaid-cli@11 -i <plik>.mmd -o <plik>.png -b white -s 2`.
+- Render: `npx -y @mermaid-js/mermaid-cli@11 -i <plik>.mmd -o <plik>.png -b white -s 2 -w 1600`.
 - Bez nowej zależności w `pyproject.toml` i bez zmian w CI.
 - Treść diagramów bierzesz z `SKILL.md` i `.ai/config/project.md`, nie z artykułu.
 - Teksty w diagramach po polsku, z pełną diakrytyką.
@@ -226,7 +226,7 @@ flowchart TB
 Uruchom:
 
 ```bash
-for f in docs/diagrams/*.mmd; do npx -y @mermaid-js/mermaid-cli@11 -i "$f" -o "${f%.mmd}.png" -b white -s 2; done
+for f in docs/diagrams/*.mmd; do npx -y @mermaid-js/mermaid-cli@11 -i "$f" -o "${f%.mmd}.png" -b white -s 2 -w 1600; done
 ```
 
 Oczekiwany wynik: 4 pliki PNG, bez błędu parsowania.
@@ -301,7 +301,7 @@ Ten katalog trzyma diagramy z sekcji „Proces” w głównym `README.md`. Każd
 2. Wyrenderuj obraz:
 
    ```bash
-   npx -y @mermaid-js/mermaid-cli@11 -i docs/diagrams/<nazwa>.mmd -o docs/diagrams/<nazwa>.png -b white -s 2
+   npx -y @mermaid-js/mermaid-cli@11 -i docs/diagrams/<nazwa>.mmd -o docs/diagrams/<nazwa>.png -b white -s 2 -w 1600
    ```
 
 3. Zacommituj oba pliki razem.

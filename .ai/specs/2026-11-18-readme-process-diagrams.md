@@ -42,7 +42,7 @@ Mermaid CLI to narzędzie autora, nie zależność projektu. Operator zatwierdzi
 | `docs/diagrams/03-decyzje-operatora.mmd` / `.png` | Gdzie decyduje operator |
 | `docs/diagrams/04-klocki-i-lancuchy.mmd` / `.png` | Klocki i łańcuchy |
 
-Render: `npx -y @mermaid-js/mermaid-cli@11 -i <plik>.mmd -o <plik>.png -b white -s 2`. Skala 2 daje ostry obraz na ekranach o dużej gęstości.
+Render: `npx -y @mermaid-js/mermaid-cli@11 -i <plik>.mmd -o <plik>.png -b white -s 2 -w 1600`. Skala 2 daje ostry obraz na ekranach o dużej gęstości. Szerokość okna 1600 px chroni szeroki diagram przed zmniejszeniem.
 
 README osadza obraz ścieżką względną: `![opis](docs/diagrams/01-dwie-drogi.png)`. Tekst alternatywny streszcza diagram.
 

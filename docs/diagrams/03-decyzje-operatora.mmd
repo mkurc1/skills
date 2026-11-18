@@ -1,0 +1,21 @@
+---
+config:
+  flowchart:
+    wrappingWidth: 400
+---
+flowchart LR
+  classDef decision fill:#fde8e8,stroke:#c0392b,color:#1a1a1a,text-align:left
+  classDef moment fill:#e8f0fe,stroke:#3b6fd6,color:#1a1a1a
+  classDef human fill:#fff4d6,stroke:#b8860b,color:#1a1a1a
+
+  D["<b>5 decyzji opiekuna</b><br/>z .ai/config/project.md<br/><br/>1. Zmiana, która wymaga zapisu<br/>decyzji architektonicznej (ADR)<br/>2. Zmiana granic modułów<br/>3. Nowa biblioteka albo usługa zewnętrzna<br/>4. Wyraźna zmiana projektu systemu<br/>5. Zmiana kontraktu .ai/config/"]
+
+  D --> M1["<b>Moment 1</b><br/>ba-plan, strażnik nr 1<br/>decyzja trafia do pytań<br/>przed specyfikacją"]
+  D --> M2["<b>Moment 2</b><br/>ba-implement, strażnik nr 2<br/>decyzja spoza specyfikacji<br/>zatrzymuje pracę"]
+  M1 --> Q(["Operator<br/>wybiera opcję"])
+  M2 --> Q
+  Q --> S["Agent pracuje dalej<br/>z wyborem operatora"]
+
+  class D decision
+  class M1,M2 moment
+  class Q human

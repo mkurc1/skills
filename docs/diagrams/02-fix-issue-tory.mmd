@@ -1,0 +1,26 @@
+sequenceDiagram
+  autonumber
+  actor O as Operator
+  participant A as Agent
+  participant G as GitHub
+
+  O->>A: /ba-fix-issue n
+  A->>G: ba-github-issues read: treść i komentarze
+  A->>G: ba-github-issues start: in-progress, assignee, gałąź
+  rect rgb(255, 244, 214)
+    note over O,A: ba-plan, rozmowa o specyfikacji
+    A->>O: pytania po jednym, 2–3 podejścia
+    O->>A: odpowiedzi i wybór podejścia
+    A->>O: specyfikacja do akceptacji
+    O->>A: akceptuję
+  end
+  A->>A: plan w .ai/specs/
+  A->>G: komentarz z planem w issue
+  A->>A: ba-implement: zadania z planu, bramka jakości, commit
+  A->>A: ba-ship-pr: bramka jakości, lokalne review
+  A->>G: push i PR z „Closes” do issue
+  A->>G: ba-wait-checks: czeka na każdy check
+  G-->>A: wynik każdego checka
+  A->>O: raport końcowy z linkiem do PR-a
+  O->>G: review i merge
+  G->>G: issue zamknięte po merge

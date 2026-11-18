@@ -1,0 +1,26 @@
+---
+config:
+  flowchart:
+    wrappingWidth: 320
+---
+flowchart TB
+  classDef stage fill:#e8f0fe,stroke:#3b6fd6,color:#1a1a1a
+  classDef human fill:#fff4d6,stroke:#b8860b,color:#1a1a1a
+  classDef result fill:#e6f4ea,stroke:#2e8b57,color:#1a1a1a
+
+  subgraph FIX["/ba-fix-issue"]
+    F1["1. Start<br/>ba-github-issues start"] --> F2["2. Specyfikacja i plan<br/>ba-plan"] --> F3["3. Implementacja<br/>ba-implement"] --> F4["4. Wysyłka<br/>ba-ship-pr + ba-wait-checks"]
+    OF(["Operator: rozmowa, wybór podejścia,<br/>akceptacja specyfikacji"]) -.- F2
+  end
+  subgraph AUTO["/ba-auto-fix-issue"]
+    A1["1. Start<br/>ba-github-issues start"] --> A2["2. Specyfikacja i plan<br/>ba-plan --auto"] --> A3["3. Implementacja<br/>ba-implement"] --> A4["4. Wysyłka<br/>ba-ship-pr + ba-wait-checks"]
+    OA(["Operator: jeden zestaw<br/>odpowiedzi"]) -.- A2
+  end
+
+  F4 --> PR["PR z wynikiem każdego checka"]
+  A4 --> PR
+  PR --> M(["Człowiek: review i merge"])
+
+  class F1,F2,F3,F4,A1,A2,A3,A4 stage
+  class OF,OA,M human
+  class PR result
