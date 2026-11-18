@@ -21,3 +21,31 @@ Plan: [`.ai/specs/2026-11-18-setup-delete-extra-labels-plan.md`](../specs/2026-1
 - Bramka jakości: `uv sync --locked`, `ruff check`, `ruff format --check`, `pytest`. 87 PASS.
 - Mutacja: `SKILL.md` i `README.md` cofnięte do `main`. `tests/test_setup_extra_labels.py` daje 6 FAIL. Po przywróceniu 6 PASS.
 - Druga droga: zapytanie GraphQL wycięte z `SKILL.md` i uruchomione na `mkurc1/skills`. Zwraca 17 etykiet z liczbami. Spoza konfiguracji wychodzi 9: `accessibility`, `documentation`, `duplicate`, `enhancement`, `good first issue`, `help wanted`, `invalid`, `question`, `wontfix`. Zgodne z § Dowód w issue.
+
+## Lokalne review (`ba-ship-pr`, runda 1)
+
+- 3 audytorów, potem `code-review:challenger`. `code-review:cross-verifier` pominięty: znaleziska z 2 audytorów pokrywały się, challenger je sprawdził.
+- Zastosowane:
+  - Krok 7 pomija się bez tabel etykiet w konfiguracji. Powód: etykiety skilli trafiłyby na listę.
+  - Reguły o braku `gh` i nazwach jako danych zastąpione odsyłaczem do `references/interview.md`. Powód: jedna reguła w jednym miejscu.
+  - Test listy kroków kończących turę. Powód: cofnięcie tej linii nie łamało testów.
+  - `gh label delete --yes -- '<nazwa>'`. Powód: nazwa z `-` na początku byłaby flagą. Sprawdzone: `gh` bierze nazwę po `--`.
+  - Ostrzeżenie wspomina dyskusje. Powód: licznik ich nie obejmuje.
+- Odrzucone: ograniczenie „wybierz” do listy. Challenger: fałszywy alarm, liczby są dla wszystkich etykiet, a § Czego nie robi zakazuje kasowania etykiet z konfiguracji.
+- Mutacja 3 nowych asercji: każda pada po cofnięciu swojej zmiany.
+
+## Lokalne review, runda 2
+
+- Audytor jakości z zakresem bezpieczeństwa i dokumentacji. 2 MEDIUM, 2 LOW.
+- Zastosowane:
+  - Trafienie nazwy w `.github/` też oznacza etykietę w użyciu. Powód: workflow albo Dependabot traci etykietę bez ostrzeżenia. Źródło: pytanie 8 w `references/interview.md` uznaje to za dowód użycia.
+  - Test zabezpieczeń sekcji: brak etykiet z konfiguracji na liście, ostrzeżenie, dyskusje, błąd jednej etykiety, `.github/`.
+  - Plan ma nowe polecenie `gh label delete --yes -- '<nazwa>'`.
+  - Dziennik ma aktualne liczby testów niżej.
+
+## Lokalne review, runda 3
+
+- 2 MEDIUM, oba zastosowane:
+  - Dowód użycia odsyła do pytania 8 w `references/interview.md`. Powód: druga, węższa kopia warunku.
+  - Ostrzeżenie o dyskusjach i nieodwracalności stoi przy pierwszym pytaniu. Powód: etykieta z samymi zerami nie dostaje drugiego pytania.
+- Limit 3 rund wyczerpany. Poprawek z rundy 3 nie sprawdzała już 4. runda. Push czeka na decyzję operatora.

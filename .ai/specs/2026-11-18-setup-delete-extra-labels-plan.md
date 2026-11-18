@@ -14,7 +14,7 @@ Specyfikacja: [`.ai/specs/2026-11-18-setup-delete-extra-labels.md`](2026-11-18-s
 - Opcje pierwszego pytania: „zostaw wszystkie”, „wybierz”, „skasuj wszystkie”. Rekomendowana stoi pierwsza.
 - Opcje drugiego potwierdzenia: „zostaw te”, „skasuj też te”.
 - Fraza bez pytania: „nic do skasowania”.
-- Polecenie kasowania: `gh label delete '<nazwa>' --yes`.
+- Polecenie kasowania: `gh label delete --yes -- '<nazwa>'`.
 - Zapytanie GraphQL: dokładnie to ze specyfikacji, § Przebieg kroku 7, punkt 2.
 - Inne skille nie odwołują się do kroków `ba-setup`. Test `test_no_skill_references_ba_skill_sections` tego pilnuje.
 
@@ -76,7 +76,7 @@ def test_extra_labels_section_counts_usage_and_deletes() -> None:
     for phrase in [
         "gh api graphql --paginate",
         "pullRequests(states: [CLOSED, MERGED])",
-        "gh label delete '<nazwa>' --yes",
+        "gh label delete --yes -- '<nazwa>'",
         "nic do skasowania",
     ]:
         assert phrase in section, f"missing: {phrase}"

@@ -40,7 +40,7 @@ def test_extra_labels_section_counts_usage_and_deletes() -> None:
     for phrase in [
         "gh api graphql --paginate",
         "pullRequests(states: [CLOSED, MERGED])",
-        "gh label delete '<nazwa>' --yes",
+        "gh label delete --yes -- '<nazwa>'",
         "nic do skasowania",
     ]:
         assert phrase in section, f"missing: {phrase}"
@@ -63,6 +63,40 @@ def test_setup_no_longer_forbids_deleting_every_label() -> None:
     assert "nie zmieniasz i nie kasujesz" not in text
     assert "Nie zmienia ani nie kasuje istniejących etykiet" not in text
     assert "Nie kasuje etykiet z konfiguracji ani bez zgody operatora" in text
+
+
+def test_extra_labels_section_keeps_safeguards() -> None:
+    section = _section()
+
+    for phrase in [
+        "Etykieta z konfiguracji nigdy nie trafia na listę",
+        "Tego nie da się cofnąć",
+        "Licznik nie obejmuje dyskusji",
+        "nie zatrzymuje reszty",
+        "dowodem użycia według pytania 8",
+    ]:
+        assert phrase in section, f"missing safeguard: {phrase}"
+
+
+def test_extra_labels_warning_precedes_first_question_answer() -> None:
+    section = _section()
+    warning = section.find("Licznik nie obejmuje dyskusji")
+
+    assert -1 < section.find("„skasuj wszystkie”") < warning < section.find("„zostaw te”")
+
+
+def test_extra_labels_step_skips_without_config_label_tables() -> None:
+    section = _section()
+
+    assert "0 etykiet z konfiguracji" in section
+    assert "Krok pomijasz" in section
+
+
+def test_setup_turn_ending_steps_follow_renumbering() -> None:
+    text = _text()
+
+    assert "kończy turę pytaniem w krokach 3, 5 i 8" in text
+    assert "w kroku 7 tylko przy etykietach spoza konfiguracji" in text
 
 
 def test_setup_report_lists_deleted_and_kept_labels() -> None:

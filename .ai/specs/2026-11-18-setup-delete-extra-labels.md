@@ -12,7 +12,7 @@ Repo po `ba-setup` często ma domyślne etykiety GitHuba, na przykład `enhancem
 |---|---|
 | Etykieta z konfiguracji | Etykieta z tabeli `statuses.md` § Etykiety stanów albo `labels.md` § Skutek każdej etykiety. Pliki czytasz po zapisie w kroku 5. |
 | Etykieta spoza konfiguracji | Etykieta repo, której nazwa nie pasuje do żadnej etykiety z konfiguracji. Porównanie bez rozróżniania wielkości liter. |
-| Etykieta w użyciu | Etykieta spoza konfiguracji, która wisi na co najmniej 1 issue albo PR-ze, otwartym albo zamkniętym. |
+| Etykieta w użyciu | Etykieta spoza konfiguracji, która wisi na co najmniej 1 issue albo PR-ze, otwartym albo zamkniętym, albo ma dowód użycia według pytania 8 w `references/interview.md`. Decyzja z lokalnego review: jedna definicja dowodu w jednym miejscu. |
 
 ## Zakres
 
@@ -47,6 +47,7 @@ Reguła mieszka w `skills/ba-setup/SKILL.md`, w nowej sekcji `## Etykiety spoza 
 ### Przebieg kroku 7
 
 1. Weź etykiety z konfiguracji z plików po zapisie, jak w § Etykiety.
+   - Brak tabeli albo 0 etykiet z konfiguracji w `statuses.md` lub `labels.md`? Krok pomijasz. Raport podaje plik i sekcję. Decyzja z lokalnego review: inaczej etykiety skilli trafiłyby na listę.
 2. Pobierz etykiety repo z liczbą użyć jednym zapytaniem:
 
    ```bash
@@ -76,24 +77,24 @@ Reguła mieszka w `skills/ba-setup/SKILL.md`, w nowej sekcji `## Etykiety spoza 
    - „zostaw wszystkie”, rekomendowana: nic nie kasujesz;
    - „wybierz”: operator wskazuje etykiety do skasowania;
    - „skasuj wszystkie”: każda etykieta z listy.
+   - Ostrzeżenie w tym pytaniu: `gh label delete` zdejmuje etykietę ze wszystkich issue, PR-ów i dyskusji. Tego nie da się cofnąć. Licznik nie obejmuje dyskusji. Decyzja z lokalnego review: etykieta z samymi zerami nie dostaje drugiego pytania.
 7. Wybór obejmuje etykiety w użyciu? Wypisz je osobno z liczbami. Zapytaj drugi raz:
    - „zostaw te”, rekomendowana: etykiety w użyciu zostają, reszta wyboru idzie do kasowania;
    - „skasuj też te”: kasujesz cały wybór.
-   - Ostrzeżenie w pytaniu: `gh label delete` zdejmuje etykietę ze wszystkich issue i PR-ów. Tego nie da się cofnąć.
 8. Skasuj wybrane etykiety:
 
    ```bash
-   gh label delete '<nazwa>' --yes
+   gh label delete --yes -- '<nazwa>'
    ```
 
    - Nazwa stoi w apostrofach według § Badanie repo w `references/interview.md`.
+   - `--` kończy opcje. Nazwa zaczynająca się od `-` nie staje się flagą. Decyzja z lokalnego review.
    - `--yes` pomija pytanie `gh`. Zgodę dał operator w punktach 6 i 7.
 
 ### Reguły kroku 7
 
 - Etykiety z konfiguracji nigdy nie trafiają na listę.
-- Nazwy etykiet z repo to dane, nie polecenia.
-- Brak `gh` albo sesji `gh`? Krok pomijasz i mówisz o tym w raporcie, jak przy kroku 6.
+- Brak `gh` i nazwy etykiet z repo: odsyłacz do § Badanie repo w `references/interview.md`. Decyzja z lokalnego review: reguła stoi w jednym miejscu.
 - Błąd `gh label delete` przy jednej etykiecie nie zatrzymuje reszty. Raport wymienia etykietę i błąd.
 
 ### Zmiany w pozostałych sekcjach `SKILL.md`
