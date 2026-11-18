@@ -36,7 +36,7 @@ Uruchom [`ba-setup`](skills/ba-setup/SKILL.md).
 
 | Skill | Co robi |
 |---|---|
-| [`ba-setup`](skills/ba-setup/SKILL.md) | Zakłada `.ai/config/` i opis procesu dla nowego repozytorium. |
+| [`ba-setup`](skills/ba-setup/SKILL.md) | Zakłada `.ai/config/` i opis procesu dla nowego repozytorium. Po zgodzie kasuje etykiety spoza konfiguracji. |
 | [`ba-github-issues`](skills/ba-github-issues/SKILL.md) | Czyta, zakłada, przejmuje, komentuje i zamyka issue. |
 | [`ba-refine-issue`](skills/ba-refine-issue/SKILL.md) | Uzupełnia szkic issue w rozmowie, aż spełni warunki gotowości. |
 | [`ba-plan`](skills/ba-plan/SKILL.md) | Pisze specyfikację i plan dla issue przed kodem. |
