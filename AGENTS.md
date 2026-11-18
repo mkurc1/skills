@@ -10,7 +10,7 @@ Test `tests/test_agents_md.py` czyta nagłówki `## ` tego pliku. Zmiana nagłó
 
 | Rodzaj zmiany | Co przeczytać | Kluczowe reguły |
 |---|---|---|
-| Treść skilla (`skills/*/SKILL.md`) | § Reguły skilli, `SKILL.md` skilla wołającego i wołanego, test skilla w `tests/` | Skill woła inny skill tylko przez jego `## Wywołanie`. Wartości projektu stoją w `.ai/config/`, nie w skillu. |
+| Treść skilla (`skills/*/SKILL.md`) | § Reguły skilli, `SKILL.md` skilla wołającego i wołanego, test skilla w `tests/` | Łączenie skilli: `.ai/docs/sdlc.md` § Łączenie skilli. Wartości projektu stoją w `.ai/config/`, nie w skillu. |
 | Szablony `ba-setup` (`skills/ba-setup/references/`) | `skills/ba-setup/SKILL.md`, `skills/ba-setup/references/interview.md`, `tests/test_skill_portability.py`, `tests/test_setup_extra_labels.py` | Szablon to kontrakt `.ai/config/`. Zmiana szablonu albo jego nagłówka `## ` to decyzja opiekuna z `.ai/config/project.md` § Decyzje opiekuna. Znacznik wariantu ma parę w `interview.md`. |
 | Testy w `tests/` | `tests/support/tracked_files.py`, `pyproject.toml` | Test, który przegląda katalog, bierze pliki z `tracked_files`. |
 | CI w `.github/workflows/` | `.github/workflows/ci.yml`, `.ai/config/project.md` § Bramka jakości | Komendy jobów `lint` i `test` opisuje `.ai/config/project.md` § Bramka jakości. Job `install` liczy skille. |
@@ -18,7 +18,7 @@ Test `tests/test_agents_md.py` czyta nagłówki `## ` tego pliku. Zmiana nagłó
 
 Skille i agentów do każdego rodzaju zmiany podaje `.ai/config/project.md` § Dobór skilli.
 
-Nowy skill zmienia liczbę skilli w dwóch miejscach: w jobie `install` w `ci.yml` i w `tests/test_skill_frontmatter.py`.
+Nowy albo usunięty skill: `.ai/config/definition-of-done.md` § Gdy zmiana dotyka `skills/`.
 
 ## Reguły skilli
 
@@ -41,7 +41,7 @@ Testy w `tests/` pilnują tych reguł. Złamana reguła daje czerwoną bramkę j
 
 Tych reguł test nie pilnuje:
 
-- Skill woła inny skill tylko przez jego `## Wywołanie`.
+- Łączenie skilli według `.ai/docs/sdlc.md` § Łączenie skilli. Test łapie tylko odwołania do sekcji i kroków.
 - Skill nie kopiuje komend bramki jakości. Komendy stoją w `.ai/config/project.md`.
   - `tests/test_skill_portability.py` szuka tylko komend spoza tego repo.
 - Zmiana kontraktu zmienia wszystkich czytelników w tym samym PR-ze.

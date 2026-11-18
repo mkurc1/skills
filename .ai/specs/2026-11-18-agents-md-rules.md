@@ -44,7 +44,8 @@ Sekcje `## ` w tej kolejności:
    - CI w `.github/workflows/`.
    - Dokumentacja i diagramy (`README.md`, `docs/diagrams/`).
 3. `## Reguły skilli`: reguły z testów, każda z nazwą testu, który jej pilnuje.
-   - Każdy skill `ba-*` ma sekcję `## Wywołanie`. Skille wołają się tylko przez nią, bez odwołań do sekcji i kroków innego skilla. Test: `tests/test_skill_contracts.py`.
+   - Każdy skill `ba-*` ma sekcję `## Wywołanie`. Skill nie odsyła do sekcji ani kroku innego skilla. Test: `tests/test_skill_contracts.py`.
+   - Łączenie skilli odsyła do `.ai/docs/sdlc.md` § Łączenie skilli. Reguła stoi na liście bez testu.
    - Front matter `SKILL.md` parsuje się jako YAML. Repo ma 11 skilli. Test: `tests/test_skill_frontmatter.py`.
    - Skill przenośny nie nazywa projektu. Wartości projektu stoją w `.ai/config/`. Test: `tests/test_skill_portability.py`.
    - Skill nie kopiuje komend bramki jakości. Komendy stoją w `.ai/config/project.md`. Test szuka tylko komend spoza repo, więc reguła stoi na liście bez testu.
@@ -59,7 +60,7 @@ Sekcje `## ` w tej kolejności:
 5. `## Bramka jakości`: odesłanie do `.ai/config/project.md` § Bramka jakości. Bez kopii komend.
 6. `## Proces`: odesłanie do `.ai/docs/sdlc.md`, do `project.md` § Gałąź i do reguł gita z sesji.
 
-`AGENTS.md` nie kopiuje treści `project.md`. Skille do rodzaju zmiany i bramkę jakości podaje odesłaniem.
+`AGENTS.md` nie kopiuje treści `project.md`, `sdlc.md` ani DoD. Skille do rodzaju zmiany i bramkę jakości podaje odesłaniem.
 
 Nagłówek sekcji to `## Katalog .ai/`. Odwołanie w `ba-ship-pr` brzmi „`AGENTS.md` § Katalog `.ai/`”. Test porównuje nazwę bez backticków.
 

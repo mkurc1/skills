@@ -45,3 +45,7 @@ Plan: [`.ai/specs/2026-11-18-agents-md-rules-plan.md`](../specs/2026-11-18-agent
   - Odrzucone przez challengera: powtórzenie reguły w obrębie jednego pliku, druga asercja `uv ` w teście `AGENTS.md`.
   - Zostają jako LOW: skan odwołań obejmuje archiwum `.ai/specs/`, regex odwołań wymaga backticków.
 - Issue spoza zakresu: #14 (test kopii komend bramki nie zna komend repo), #15 (`ba-ship-pr` odsyła do sekcji `AGENTS.md`, której nie ma w innych repo).
+- Runda 2 review (quality, docs). Security pominięty: poprawki to sam tekst, runda 1 dała 0.
+  - Przyjęte (MEDIUM): reguła o `## Wywołanie` w `AGENTS.md` kopiowała `sdlc.md` § Łączenie skilli. Zastąpiona odesłaniem.
+  - Przyjęte (MEDIUM): liczba skilli w `AGENTS.md` kopiowała DoD i rozjeżdżała się z nim. `AGENTS.md` odsyła do DoD. DoD dostał brakujący `tests/test_skill_frontmatter.py`.
+  - Przyjęte (LOW): specyfikacja opisuje regułę łączenia skilli jako regułę bez testu.

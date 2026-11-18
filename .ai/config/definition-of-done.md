@@ -54,7 +54,7 @@ Komendy bramki stoją w [`project.md` § Bramka jakości](project.md#bramka-jako
 ### Gdy zmiana dotyka `skills/`
 
 - Nowy albo usunięty skill aktualizuje tabelę „Skille” w `README.md`.
-- Nowy albo usunięty skill aktualizuje oczekiwaną liczbę skilli w jobie `install` w `.github/workflows/ci.yml`.
+- Nowy albo usunięty skill aktualizuje oczekiwaną liczbę skilli w jobie `install` w `.github/workflows/ci.yml` i w `tests/test_skill_frontmatter.py`.
 - Zmiana szablonu w `skills/ba-setup/references/` przechodzi testy kontraktów w `tests/`.
 
 ---
