@@ -49,3 +49,12 @@ Plan: [`.ai/specs/2026-11-18-setup-delete-extra-labels-plan.md`](../specs/2026-1
   - Dowód użycia odsyła do pytania 8 w `references/interview.md`. Powód: druga, węższa kopia warunku.
   - Ostrzeżenie o dyskusjach i nieodwracalności stoi przy pierwszym pytaniu. Powód: etykieta z samymi zerami nie dostaje drugiego pytania.
 - Limit 3 rund wyczerpany. Poprawek z rundy 3 nie sprawdzała już 4. runda. Push czeka na decyzję operatora.
+- Bramka po rundzie 3: 91 PASS. Mutacja: ostrzeżenie przeniesione z powrotem do punktu 7 daje FAIL nowego testu.
+
+## Lokalne review, runda 4 (na prośbę operatora)
+
+- 2 MEDIUM, oba zastosowane:
+  - Test zabezpieczeń pilnuje zdania „Lista pokazuje plik trafienia”. Mutacja: usunięcie zdania daje FAIL.
+  - Dziennik ma liczby po rundzie 3 i mutację testu pozycji ostrzeżenia.
+- Bramka po rundzie 4: 91 PASS, `ruff` czysty.
+- Commit autosave cezara wciągnął `.claude/scratch/`. Commit był tylko lokalny, cofnięty. `.claude/scratch/` dopisany do lokalnego `info/exclude`.

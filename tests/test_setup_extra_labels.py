@@ -74,6 +74,7 @@ def test_extra_labels_section_keeps_safeguards() -> None:
         "Licznik nie obejmuje dyskusji",
         "nie zatrzymuje reszty",
         "dowodem użycia według pytania 8",
+        "Lista pokazuje plik trafienia",
     ]:
         assert phrase in section, f"missing safeguard: {phrase}"
 
