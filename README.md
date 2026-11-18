@@ -84,3 +84,7 @@ uv run pytest
 ```
 
 Testy pilnują kontraktów między skillami i szablonów `ba-setup`. CI uruchamia je razem z `ruff` i próbną instalacją przez `npx skills add`.
+
+## Licencja
+
+Repo jest na licencji MIT. Pełny tekst: [LICENSE](LICENSE).
