@@ -81,7 +81,7 @@ Reguły pracy agenta stoją w `AGENTS.md`. Ten plik ich nie powtarza.
 - Tabela w `## Rodzaj zmiany` ma 3 kolumny i wiersze dla `skills/*/SKILL.md`, `skills/ba-setup/references/`, `tests/`, `.github/workflows/`, `README.md`.
 - `## Katalog .ai/` wymienia `config/`, `docs/`, `specs/`, `runs/`.
 - `## Bramka jakości` odsyła do `project.md` i nie zawiera `uv run`.
-- Każde odwołanie „`AGENTS.md` § X” w plikach śledzonych przez git trafia w istniejący nagłówek `AGENTS.md`.
+- Każde odwołanie do sekcji `AGENTS.md` w plikach `.md` śledzonych przez git trafia w istniejący nagłówek `AGENTS.md`.
 - `CLAUDE.md` ma linię `@AGENTS.md`.
 - `.ai/config/project.md` i `.ai/docs/sdlc.md` nie zawierają zdania „Repo nie ma pliku z regułami pracy agenta”.
 
