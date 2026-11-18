@@ -1,7 +1,7 @@
 # Dziennik: diagramy procesu skilli ba-* w README
 
 Issue: #4
-Plan: [`.ai/specs/2026-11-18-readme-process-diagrams-plan.md`](../specs/2026-11-18-readme-process-diagrams-plan.md)
+Plan: [`.ai/specs/implemented/2026-11-18-readme-process-diagrams-plan.md`](../specs/implemented/2026-11-18-readme-process-diagrams-plan.md)
 
 ## Wybory
 
@@ -26,3 +26,5 @@ Plan: [`.ai/specs/2026-11-18-readme-process-diagrams-plan.md`](../specs/2026-11-
   - Diagram 1: adnotacja „operator tylko przy zatrzymaniu” w etapach 1, 3, 4. Wraca wymóg ze specyfikacji.
   - Diagram 4: strzałka `ba-implement` → `ba-mutation-check` według „Dobór skilli” w `project.md`.
   - README: podpis diagramu 2 bez „tylko o specyfikacji”, `--auto` bez „raz”, zgoda zaimka w podpisie diagramu 3.
+- ba-ship-pr: bramka zielona, lokalne review (security, quality, docs) bez znalezisk w rundzie 1.
+- Specyfikacja i plan przeniesione do `.ai/specs/implemented/`.
