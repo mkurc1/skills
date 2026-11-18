@@ -31,6 +31,7 @@ Uruchom [`ba-setup`](skills/ba-setup/SKILL.md).
 - Skille czytają fakty o projekcie z katalogu `.ai/config/`.
 - `ba-setup` zakłada ten katalog po krótkiej rozmowie.
 - Bez `.ai/config/` pozostałe skille się zatrzymują i odsyłają do `ba-setup`.
+- W repo skonfigurowanym wcześniej uruchom `ba-setup` ponownie. Skill dopisze brakujący wpis `.ai/scratch/` do `.gitignore`.
 
 ## Skille
 

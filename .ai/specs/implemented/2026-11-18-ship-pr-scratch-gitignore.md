@@ -47,11 +47,14 @@ Po zmianie katalog roboczy to `.ai/scratch/`. Ścieżka nie zależy od narzędzi
 
 ### `ba-setup` § Wpis w .gitignore
 
-1. Sprawdź wpis: `git check-ignore -q .ai/scratch/x`.
-   - Kod 0: wpis już działa. Nic nie zmieniasz. Raport mówi „wpis już jest”.
-2. Kod różny od 0: przygotuj linię `.ai/scratch/` na końcu `.gitignore`. Brak pliku: zakładasz go z tą linią.
+1. Sprawdź dosłowną linię: `grep -qxF '.ai/scratch/' .gitignore`.
+   - Linia jest: nic nie dopisujesz. Raport mówi „wpis już jest”.
+   - Szersza reguła (`.ai/`), globalny plik ignorowania i `.git/info/exclude` się nie liczą. Zdublowana reguła nic nie psuje.
+2. Brak linii: przygotuj linię `.ai/scratch/` na końcu `.gitignore`. Brak pliku: zakładasz go z tą linią. Plik bez końcowego znaku nowej linii najpierw go dostaje.
 3. Podgląd z kroku 5 pokazuje zmianę `.gitignore` razem z plikami `.ai/config/`. Zapis idzie po tej samej akceptacji.
-4. `.gitignore` trafia do commita z kroku 8 razem z plikami z kroku 5.
+4. Commit z kroku 8 zabiera `.gitignore`, gdy plik różni się od `HEAD`. Dotyczy to też linii dopisanej wcześniej bez commita.
+
+Wykrywanie przez `git check-ignore` odrzucone w review (rundy 2-4). Łapało regułę globalną, `.git/info/exclude`, regułę z `!` i niezacommitowany `.gitignore`. Dosłowna linia jest prostsza i nie ma tych przypadków.
 
 Kroki `ba-setup` zachowują numerację. Wpis przygotowuje krok 4, pokazuje krok 5. Ponowne uruchomienie `ba-setup` w repo z kompletną konfiguracją też dopisuje brakujący wpis.
 
@@ -71,10 +74,10 @@ Raport końcowy `ba-setup` mówi, czy wpis dopisano, czy już był.
 - `grep -n ".claude/scratch" skills/` nie daje trafień.
 - Test pilnuje, że `.gitignore` tego repo ignoruje `.ai/scratch/`.
 - Test pilnuje, że `ba-ship-pr` zapisuje do `.ai/scratch/reviews/` i nie zapisuje do `.claude/scratch/`.
-- Test pilnuje, że `ba-setup` ma sekcję `## Wpis w .gitignore` z `.ai/scratch/` i `git check-ignore`, a krok 4 do niej odsyła.
+- Test pilnuje, że `ba-setup` ma sekcję `## Wpis w .gitignore` z `.ai/scratch/`, a krok 4 do niej odsyła. Test uruchamia blok sprawdzenia na wariantach `.gitignore`.
 - Bramka jakości z `project.md` przechodzi.
 
 ## Ryzyka i otwarte pytania
 
 - Repo skonfigurowane przed tą zmianą nie ma wpisu. Pomaga ponowne uruchomienie `ba-setup`. `README.md` to mówi.
-- `.gitignore` obcego repo może ignorować całe `.ai/`. Wtedy `git check-ignore` zwraca 0 i `ba-setup` nic nie dopisuje. To poprawne.
+- `.gitignore` obcego repo może ignorować całe `.ai/`. `ba-setup` i tak dopisze `.ai/scratch/`. Zdublowana reguła nic nie psuje.

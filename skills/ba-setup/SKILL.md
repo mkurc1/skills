@@ -5,7 +5,7 @@ description: Use ONLY when the user explicitly runs /ba-setup or asks to set up 
 
 # /ba-setup — konfiguracja `.ai/config/` dla repozytorium
 
-Wejście: repozytorium bez kompletu `.ai/config/`. Wynik: 12 plików `.ai/config/` i `.ai/docs/sdlc.md`, wpis `.ai/scratch/` w `.gitignore`, etykiety w repo, etykiety spoza konfiguracji skasowane po zgodzie i propozycja commita.
+Wejście: repozytorium bez kompletu `.ai/config/` albo bez wpisu `.ai/scratch/` w `.gitignore`. Wynik: 12 plików `.ai/config/` i `.ai/docs/sdlc.md`, wpis `.ai/scratch/` w `.gitignore`, etykiety w repo, etykiety spoza konfiguracji skasowane po zgodzie i propozycja commita.
 
 Skill bada repo, pyta operatora o resztę i wypełnia szablony z `references/`. Istniejącego pliku nie nadpisuje bez pytania.
 
@@ -61,7 +61,7 @@ Reguły badania repo, pytań i wypełniania szablonów stoją w [`references/int
    - Gałąź główna albo odłączony HEAD? Najpierw nowa gałąź, na przykład `git switch -c chore/ba-setup`. Na gałęzi głównej nie commitujesz nigdy.
    - Commit robisz tylko na innej gałęzi niż główna, po zgodzie operatora.
    - Wiadomość commita w stylu ostatnich commitów repo (`git log --oneline -10`).
-   - Do commita dodajesz tylko pliki zapisane w kroku 5, także `.gitignore`.
+   - Do commita dodajesz tylko pliki zapisane w kroku 5. `.gitignore` dodajesz według § Wpis w .gitignore.
 
    ```bash
    git add <pliki zapisane w kroku 5>
@@ -96,16 +96,18 @@ Nagłówki `## ` w `project.md` to kontrakt ze skillami `ba-*`. Plik bez której
 
 `ba-ship-pr` zapisuje snapshot i raporty review w `.ai/scratch/`. Pliki z tego katalogu nie mogą wejść do commita. Pilnuje tego wpis `.ai/scratch/` w `.gitignore`.
 
-1. Sprawdź, czy git już ignoruje katalog:
+1. Sprawdź, czy `.gitignore` ma dosłownie linię `.ai/scratch/`:
 
    ```bash
-   git check-ignore -q .ai/scratch/x
+   grep -qxF '.ai/scratch/' .gitignore 2>/dev/null && echo "wpis już jest"
    ```
 
-   - Kod 0: wpis działa. Nic nie zmieniasz. Raport mówi „wpis już jest”.
-2. Inny kod: przygotuj linię `.ai/scratch/` na końcu `.gitignore`. Brak pliku: zakładasz go z tą linią.
+   - Linia jest: nic nie dopisujesz. Raport mówi „wpis już jest”.
+   - Liczy się tylko ta linia w `.gitignore` repo. Szersza reguła, na przykład `.ai/`, globalny plik ignorowania i `.git/info/exclude` jej nie zastępują. Zdublowana reguła nic nie psuje.
+2. Brak linii: przygotuj linię `.ai/scratch/` na końcu `.gitignore`. Brak pliku: zakładasz go z tą linią.
+   - Plik nie kończy się znakiem nowej linii? Najpierw dopisz ten znak. Bez niego linia sklei się z ostatnią regułą.
 3. Podgląd z kroku 5 pokazuje zmianę `.gitignore`. Zapis idzie po tej samej akceptacji co pliki `.ai/config/`.
-4. Commit z kroku 8 zabiera `.gitignore` razem z plikami `.ai/config/`.
+4. Commit z kroku 8 zabiera `.gitignore`, gdy plik różni się od ostatniego commita (`git diff --quiet HEAD -- .gitignore` kończy się kodem różnym od 0). Dotyczy to też linii dopisanej wcześniej bez commita.
 
 Wpis powstaje także wtedy, gdy wszystkie pliki z tabeli „Pliki” już istnieją. Repo skonfigurowane wcześniej dostaje go przy ponownym uruchomieniu `ba-setup`.
 
