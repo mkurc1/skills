@@ -30,3 +30,18 @@ Plan: [`.ai/specs/2026-11-18-agents-md-rules-plan.md`](../specs/2026-11-18-agent
   - Odrzucona: szerszy regex odwołań z kropką jako końcem. Uciąłby nazwę „Katalog `.ai/`”.
   - Treść `AGENTS.md` odbiega przez to od bloku w planie. Plan zostaje bez zmian, źródłem jest `AGENTS.md`.
 - Bramka po poprawkach zielona: 98 testów.
+- Krok dokumentacji: zdanie w `README.md` § Testy z odesłaniem do `AGENTS.md`. Commit 3b202a7.
+
+## ba-ship-pr
+
+- Bramka zielona przed review.
+- Runda 1 review (security, quality, docs, potem challenger i cross-verifier).
+  - Security: 0 znalezisk.
+  - Przyjęte: kopie z `project.md` § Dobór skilli w tabeli `AGENTS.md` zastąpione odesłaniem. Usunięta kopia zdania o zielonej bramce.
+  - Przyjęte: reguła o kopii komend bramki przeszła do reguł bez testu. Test szuka tylko komend spoza repo.
+  - Przyjęte: § Proces odsyła do `project.md` § Gałąź.
+  - Przyjęte: kryterium grep w specyfikacji zawężone do `.ai/config/` i `.ai/docs/`. Opis testu w specyfikacji uzupełniony o `code-review.md` i `uv `. Zakres uzupełniony o `README.md`.
+  - Przyjęte: zdanie o `tracked_files` zawężone do testów, które przeglądają katalog.
+  - Odrzucone przez challengera: powtórzenie reguły w obrębie jednego pliku, druga asercja `uv ` w teście `AGENTS.md`.
+  - Zostają jako LOW: skan odwołań obejmuje archiwum `.ai/specs/`, regex odwołań wymaga backticków.
+- Issue spoza zakresu: #14 (test kopii komend bramki nie zna komend repo), #15 (`ba-ship-pr` odsyła do sekcji `AGENTS.md`, której nie ma w innych repo).

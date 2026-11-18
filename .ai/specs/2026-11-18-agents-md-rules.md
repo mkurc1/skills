@@ -13,6 +13,7 @@ Agent, który zmienia to repo, dostaje reguły pracy w jednym pliku `AGENTS.md`.
 - Zdanie „Repo nie ma pliku z regułami pracy agenta” w `.ai/config/project.md` § Dokumentacja przed pracą i w `.ai/docs/sdlc.md` zastąpione odesłaniem do `AGENTS.md`.
 - To samo zdanie w `.ai/config/code-review.md:10`. Issue go nie wymienia. Znalezione przy implementacji: po zmianie zdanie byłoby fałszywe.
 - Nowy test `tests/test_agents_md.py`.
+- Zdanie w `README.md` § Testy z odesłaniem do `AGENTS.md`. Krok dokumentacji z `.ai/config/project.md` § Dobór skilli.
 
 ### Poza zakresem
 
@@ -46,7 +47,7 @@ Sekcje `## ` w tej kolejności:
    - Każdy skill `ba-*` ma sekcję `## Wywołanie`. Skille wołają się tylko przez nią, bez odwołań do sekcji i kroków innego skilla. Test: `tests/test_skill_contracts.py`.
    - Front matter `SKILL.md` parsuje się jako YAML. Repo ma 11 skilli. Test: `tests/test_skill_frontmatter.py`.
    - Skill przenośny nie nazywa projektu. Wartości projektu stoją w `.ai/config/`. Test: `tests/test_skill_portability.py`.
-   - Skill nie kopiuje komend bramki jakości. Komendy stoją w `.ai/config/project.md`.
+   - Skill nie kopiuje komend bramki jakości. Komendy stoją w `.ai/config/project.md`. Test szuka tylko komend spoza repo, więc reguła stoi na liście bez testu.
    - Plik konfiguracji, który skill wymienia w sekcji `## Konfiguracja`, ma szablon w `skills/ba-setup/references/config/`.
    - Sekcja `project.md`, którą skill czyta po nazwie, istnieje w szablonie.
    - Zmiana kontraktu zmienia wszystkich czytelników w tym samym PR-ze. Kontrakt to nagłówek albo format, który czyta inny skill albo test.
@@ -56,7 +57,9 @@ Sekcje `## ` w tej kolejności:
    - `specs/`: specyfikacje i plany przed kodem. Zrobione przechodzą do `specs/implemented/`.
    - `runs/`: dzienniki przebiegów autonomicznych.
 5. `## Bramka jakości`: odesłanie do `.ai/config/project.md` § Bramka jakości. Bez kopii komend.
-6. `## Proces`: odesłanie do `.ai/docs/sdlc.md` i reguł gita z sesji.
+6. `## Proces`: odesłanie do `.ai/docs/sdlc.md`, do `project.md` § Gałąź i do reguł gita z sesji.
+
+`AGENTS.md` nie kopiuje treści `project.md`. Skille do rodzaju zmiany i bramkę jakości podaje odesłaniem.
 
 Nagłówek sekcji to `## Katalog .ai/`. Odwołanie w `ba-ship-pr` brzmi „`AGENTS.md` § Katalog `.ai/`”. Test porównuje nazwę bez backticków.
 
@@ -81,10 +84,10 @@ Reguły pracy agenta stoją w `AGENTS.md`. Ten plik ich nie powtarza.
 - `AGENTS.md` ma sekcje: `Rodzaj zmiany`, `Reguły skilli`, `Katalog .ai/`, `Bramka jakości`.
 - Tabela w `## Rodzaj zmiany` ma 3 kolumny i wiersze dla `skills/*/SKILL.md`, `skills/ba-setup/references/`, `tests/`, `.github/workflows/`, `README.md`.
 - `## Katalog .ai/` wymienia `config/`, `docs/`, `specs/`, `runs/`.
-- `## Bramka jakości` odsyła do `project.md` i nie zawiera `uv run`.
+- `## Bramka jakości` odsyła do `project.md` i nie zawiera `uv `.
 - Każde odwołanie do sekcji `AGENTS.md` w plikach `.md` śledzonych przez git trafia w istniejący nagłówek `AGENTS.md`.
 - `CLAUDE.md` ma linię `@AGENTS.md`.
-- `.ai/config/project.md` i `.ai/docs/sdlc.md` nie zawierają zdania „Repo nie ma pliku z regułami pracy agenta”.
+- `.ai/config/code-review.md`, `.ai/config/project.md` i `.ai/docs/sdlc.md` nie zawierają zdania „Repo nie ma pliku z regułami pracy agenta”.
 
 ## Plan
 
@@ -96,7 +99,7 @@ Reguły pracy agenta stoją w `AGENTS.md`. Ten plik ich nie powtarza.
 
 - `uv run pytest tests/test_agents_md.py` przechodzi.
 - Bramka jakości z `.ai/config/project.md` przechodzi.
-- `grep -rn "Repo nie ma pliku z regułami pracy agenta" .ai/` nic nie zwraca.
+- `grep -rn "Repo nie ma pliku z regułami pracy agenta" .ai/config/ .ai/docs/` nic nie zwraca.
 
 ## Ryzyka i otwarte pytania
 

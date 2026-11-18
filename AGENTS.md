@@ -10,11 +10,13 @@ Test `tests/test_agents_md.py` czyta nagłówki `## ` tego pliku. Zmiana nagłó
 
 | Rodzaj zmiany | Co przeczytać | Kluczowe reguły |
 |---|---|---|
-| Treść skilla (`skills/*/SKILL.md`) | § Reguły skilli, `SKILL.md` skilla wołającego i wołanego, test skilla w `tests/` | Skill woła inny skill tylko przez jego `## Wywołanie`. Wartości projektu stoją w `.ai/config/`, nie w skillu. Treść piszesz ze skillem `superpowers:writing-skills`. |
+| Treść skilla (`skills/*/SKILL.md`) | § Reguły skilli, `SKILL.md` skilla wołającego i wołanego, test skilla w `tests/` | Skill woła inny skill tylko przez jego `## Wywołanie`. Wartości projektu stoją w `.ai/config/`, nie w skillu. |
 | Szablony `ba-setup` (`skills/ba-setup/references/`) | `skills/ba-setup/SKILL.md`, `skills/ba-setup/references/interview.md`, `tests/test_skill_portability.py`, `tests/test_setup_extra_labels.py` | Szablon to kontrakt `.ai/config/`. Zmiana szablonu albo jego nagłówka `## ` to decyzja opiekuna z `.ai/config/project.md` § Decyzje opiekuna. Znacznik wariantu ma parę w `interview.md`. |
-| Testy w `tests/` | `tests/support/tracked_files.py`, `pyproject.toml` | Test czyta pliki śledzone przez git przez `tracked_files`. Nowy test regresyjny sprawdzasz skillem `ba-mutation-check`. Kod testów pisze agent `python-developer:developer`. |
-| CI w `.github/workflows/` | `.github/workflows/ci.yml`, `.ai/config/project.md` § Bramka jakości | Joby `lint` i `test` uruchamiają komendy bramki jakości. Zmiana jednej strony wymaga zmiany drugiej. Job `install` liczy skille. |
-| Dokumentacja i diagramy (`README.md`, `docs/diagrams/`) | `README.md`, `docs/diagrams/README.md`, `tests/test_readme_diagrams.py` | Nowy albo zmieniony skill aktualizuje tabelę skilli w `README.md` w tym samym PR-ze. Diagram ma źródło `.mmd` i obraz `.png`. Oba commitujesz razem. |
+| Testy w `tests/` | `tests/support/tracked_files.py`, `pyproject.toml` | Test, który przegląda katalog, bierze pliki z `tracked_files`. |
+| CI w `.github/workflows/` | `.github/workflows/ci.yml`, `.ai/config/project.md` § Bramka jakości | Komendy jobów `lint` i `test` opisuje `.ai/config/project.md` § Bramka jakości. Job `install` liczy skille. |
+| Dokumentacja i diagramy (`README.md`, `docs/diagrams/`) | `README.md`, `docs/diagrams/README.md`, `tests/test_readme_diagrams.py` | Diagram zmieniasz według `docs/diagrams/README.md`. |
+
+Skille i agentów do każdego rodzaju zmiany podaje `.ai/config/project.md` § Dobór skilli.
 
 Nowy skill zmienia liczbę skilli w dwóch miejscach: w jobie `install` w `ci.yml` i w `tests/test_skill_frontmatter.py`.
 
@@ -30,8 +32,6 @@ Testy w `tests/` pilnują tych reguł. Złamana reguła daje czerwoną bramkę j
   - Test: `tests/test_skill_frontmatter.py`.
 - Skill przenośny nie nazywa projektu, w którym powstał. Wartości projektu stoją w `.ai/config/`.
   - Test: `tests/test_skill_portability.py`.
-- Skill nie kopiuje komend bramki jakości. Komendy stoją w `.ai/config/project.md`.
-  - Test: `tests/test_skill_portability.py`.
 - Plik z sekcji `## Konfiguracja` skilla ma szablon w `skills/ba-setup/references/config/`.
   - Test: `tests/test_skill_portability.py`.
 - Sekcja `project.md`, którą skill czyta po nazwie, istnieje w szablonie `project.md`.
@@ -42,6 +42,8 @@ Testy w `tests/` pilnują tych reguł. Złamana reguła daje czerwoną bramkę j
 Tych reguł test nie pilnuje:
 
 - Skill woła inny skill tylko przez jego `## Wywołanie`.
+- Skill nie kopiuje komend bramki jakości. Komendy stoją w `.ai/config/project.md`.
+  - `tests/test_skill_portability.py` szuka tylko komend spoza tego repo.
 - Zmiana kontraktu zmienia wszystkich czytelników w tym samym PR-ze.
   - Kontrakt to nagłówek albo format, który czyta inny skill albo test.
   - Przed zmianą wyszukaj nagłówek w `skills/`, `tests/` i `.ai/`.
@@ -65,12 +67,11 @@ Repo nie prowadzi jeszcze lekcji. Pierwsza lekcja zakłada `.ai/lessons/` i inde
 
 Komendy bramki stoją w [`.ai/config/project.md` § Bramka jakości](.ai/config/project.md#bramka-jakości). Ten plik ich nie kopiuje.
 
-Zadanie jest gotowe dopiero po zielonej bramce.
-
 ## Proces
 
 Drogę zadania od issue do merge'a opisuje [`.ai/docs/sdlc.md`](.ai/docs/sdlc.md).
 
 - Skille do sytuacji w issue: `.ai/config/project.md` § Dobór skilli.
 - Decyzje, których agent nie podejmuje sam: `.ai/config/project.md` § Decyzje opiekuna.
-- Gałąź, commit i push: reguły gita z sesji agenta.
+- Nazwa gałęzi: `.ai/config/project.md` § Gałąź.
+- Commit i push: reguły gita z sesji agenta.
