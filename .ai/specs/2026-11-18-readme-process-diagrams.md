@@ -65,7 +65,7 @@ README osadza obraz ścieżką względną: `![opis](docs/diagrams/01-dwie-drogi.
    - Moment 2: strażnik nr 2 w `ba-implement`. Decyzja opiekuna spoza specyfikacji zatrzymuje pracę.
 4. **Klocki i łańcuchy.**
    - `ba-fix-issue` i `ba-auto-fix-issue` wołają `ba-github-issues`, `ba-plan` (z `--auto` w drugim łańcuchu), `ba-implement`, `ba-ship-pr`.
-   - `ba-ship-pr` woła `ba-wait-checks` i `ba-mutation-check`.
+   - `ba-ship-pr` woła `ba-wait-checks` i `ba-mutation-check`. `ba-implement` też używa `ba-mutation-check` dla testu regresyjnego.
    - Przed łańcuchem: `ba-setup` raz na repo, `ba-refine-issue` dla niegotowego issue.
    - Poza łańcuchem, na żądanie: `ba-qa` po implementacji zmiany w interfejsie.
 

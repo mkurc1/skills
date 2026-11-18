@@ -9,12 +9,12 @@ flowchart TB
   classDef result fill:#e6f4ea,stroke:#2e8b57,color:#1a1a1a
 
   subgraph FIX["/ba-fix-issue"]
-    F1["1. Start<br/>ba-github-issues start"] --> F2["2. Specyfikacja i plan<br/>ba-plan"] --> F3["3. Implementacja<br/>ba-implement"] --> F4["4. Wysyłka<br/>ba-ship-pr + ba-wait-checks"]
+    F1["1. Start<br/>ba-github-issues start<br/><i>operator tylko przy zatrzymaniu</i>"] --> F2["2. Specyfikacja i plan<br/>ba-plan"] --> F3["3. Implementacja<br/>ba-implement<br/><i>operator tylko przy zatrzymaniu</i>"] --> F4["4. Wysyłka<br/>ba-ship-pr + ba-wait-checks<br/><i>operator tylko przy zatrzymaniu</i>"]
     OF(["Operator: rozmowa, wybór podejścia,<br/>akceptacja specyfikacji"]) -.- F2
   end
   subgraph AUTO["/ba-auto-fix-issue"]
-    A1["1. Start<br/>ba-github-issues start"] --> A2["2. Specyfikacja i plan<br/>ba-plan --auto"] --> A3["3. Implementacja<br/>ba-implement"] --> A4["4. Wysyłka<br/>ba-ship-pr + ba-wait-checks"]
-    OA(["Operator: jeden zestaw<br/>odpowiedzi"]) -.- A2
+    A1["1. Start<br/>ba-github-issues start<br/><i>operator tylko przy zatrzymaniu</i>"] --> A2["2. Specyfikacja i plan<br/>ba-plan --auto"] --> A3["3. Implementacja<br/>ba-implement<br/><i>operator tylko przy zatrzymaniu</i>"] --> A4["4. Wysyłka<br/>ba-ship-pr + ba-wait-checks<br/><i>operator tylko przy zatrzymaniu</i>"]
+    OA(["Operator: odpowiedzi<br/>na pytania o braki i decyzje"]) -.- A2
   end
 
   F4 --> PR["PR z wynikiem każdego checka"]

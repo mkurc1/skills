@@ -20,6 +20,7 @@ flowchart TB
     GI["1. ba-github-issues start"] --> PLAN["2. ba-plan"] --> IMPL["3. ba-implement"] --> SHIP["4. ba-ship-pr"]
     SHIP --> WAIT["ba-wait-checks"]
     SHIP --> MUT["ba-mutation-check"]
+    IMPL --> MUT
   end
 
   QA["ba-qa<br/>na żądanie operatora,<br/>zmiana w interfejsie"]
