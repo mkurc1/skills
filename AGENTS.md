@@ -58,6 +58,7 @@ Katalog `.ai/` trzyma wiedzę o projekcie i przebiegi pracy. Commit zabiera te p
 | `docs/` | Opis procesu dostarczania zmian w `sdlc.md`. | `ba-setup`, potem opiekun repo |
 | `specs/` | Specyfikacje, plany i plany testów przed kodem. Zrobione leżą w `specs/implemented/`. | `ba-plan` i `ba-qa`. Przenosi je `ba-ship-pr`. |
 | `runs/` | Dzienniki przebiegów autonomicznych: wybory i postęp. | `ba-implement`. Domyka je `ba-ship-pr`. |
+| `scratch/` | Snapshot i raporty lokalnego review. Ignorowany w `.gitignore`, nie trafia do repo. | `ba-ship-pr`. Wpis w `.gitignore` dodaje `ba-setup`. |
 
 Specyfikacje z `docs/superpowers/` przechodzą do `.ai/specs/`. Katalogi `docs/superpowers/` i `docs/reviews/` nie trafiają do repo.
 

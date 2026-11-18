@@ -31,12 +31,13 @@ Uruchom [`ba-setup`](skills/ba-setup/SKILL.md).
 - Skille czytają fakty o projekcie z katalogu `.ai/config/`.
 - `ba-setup` zakłada ten katalog po krótkiej rozmowie.
 - Bez `.ai/config/` pozostałe skille się zatrzymują i odsyłają do `ba-setup`.
+- W repo skonfigurowanym wcześniej uruchom `ba-setup` ponownie. Skill dopisze brakujący wpis `.ai/scratch/` do `.gitignore`.
 
 ## Skille
 
 | Skill | Co robi |
 |---|---|
-| [`ba-setup`](skills/ba-setup/SKILL.md) | Zakłada `.ai/config/` i opis procesu dla nowego repozytorium. Po zgodzie kasuje etykiety spoza konfiguracji. |
+| [`ba-setup`](skills/ba-setup/SKILL.md) | Zakłada `.ai/config/` i opis procesu dla nowego repozytorium. Dopisuje `.ai/scratch/` do `.gitignore`. Po zgodzie kasuje etykiety spoza konfiguracji. |
 | [`ba-github-issues`](skills/ba-github-issues/SKILL.md) | Czyta, zakłada, przejmuje, komentuje i zamyka issue. |
 | [`ba-refine-issue`](skills/ba-refine-issue/SKILL.md) | Uzupełnia szkic issue w rozmowie, aż spełni warunki gotowości. |
 | [`ba-plan`](skills/ba-plan/SKILL.md) | Pisze specyfikację i plan dla issue przed kodem. |
