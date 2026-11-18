@@ -6,7 +6,7 @@ Issue: #11
 
 **Architektura:** Trzy pliki konfiguracji w katalogu głównym. Najpierw test, potem pliki.
 
-Specyfikacja: [`.ai/specs/2026-11-18-editor-git-settings.md`](2026-11-18-editor-git-settings.md)
+Specyfikacja: [`.ai/specs/implemented/2026-11-18-editor-git-settings.md`](2026-11-18-editor-git-settings.md)
 
 ## Ograniczenia globalne
 

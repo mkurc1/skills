@@ -2,7 +2,7 @@
 
 Issue: #11
 
-Plan: [`.ai/specs/2026-11-18-editor-git-settings-plan.md`](../specs/2026-11-18-editor-git-settings-plan.md)
+Plan: [`.ai/specs/implemented/2026-11-18-editor-git-settings-plan.md`](../specs/implemented/2026-11-18-editor-git-settings-plan.md)
 
 ## Postęp
 
