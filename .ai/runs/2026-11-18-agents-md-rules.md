@@ -1,7 +1,7 @@
 # Dziennik: plik AGENTS.md z regułami pracy agenta
 
 Issue: #9
-Plan: [`.ai/specs/2026-11-18-agents-md-rules-plan.md`](../specs/2026-11-18-agents-md-rules-plan.md)
+Plan: [`.ai/specs/implemented/2026-11-18-agents-md-rules-plan.md`](../specs/implemented/2026-11-18-agents-md-rules-plan.md)
 
 ## Wybory
 
@@ -49,3 +49,5 @@ Plan: [`.ai/specs/2026-11-18-agents-md-rules-plan.md`](../specs/2026-11-18-agent
   - Przyjęte (MEDIUM): reguła o `## Wywołanie` w `AGENTS.md` kopiowała `sdlc.md` § Łączenie skilli. Zastąpiona odesłaniem.
   - Przyjęte (MEDIUM): liczba skilli w `AGENTS.md` kopiowała DoD i rozjeżdżała się z nim. `AGENTS.md` odsyła do DoD. DoD dostał brakujący `tests/test_skill_frontmatter.py`.
   - Przyjęte (LOW): specyfikacja opisuje regułę łączenia skilli jako regułę bez testu.
+- Runda 3 review (quality, tylko poprawki rundy 2): 0 znalezisk. Pętla zamknięta.
+- Specyfikacja i plan przeniesione do `.ai/specs/implemented/`.
