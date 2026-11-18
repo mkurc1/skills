@@ -24,3 +24,14 @@ Plan: [`.ai/specs/2026-11-18-editor-git-settings-plan.md`](../specs/2026-11-18-e
 - Mutacja CRLF: w klonie dodany plik `crlf.md` z CRLF. `test_no_tracked_file_has_crlf` FAIL.
 - Druga droga: klon z `core.autocrlf=true`. `git ls-files --eol` pokazuje 72 pliki `w/lf`, 4 PNG `w/-text`, 2 puste `w/none`. Zero CRLF.
 - `git check-attr`: `README.md` ma `text: auto`, `eol: lf`. PNG ma `text: unset`.
+
+## Lokalne review (`ba-ship-pr`)
+
+- Runda 1: 3 audytorów. `code-review:challenger` i `code-review:cross-verifier` pominięte. Powód: oba znaleziska MEDIUM sprawdziłem sam komendami.
+- Zastosowane:
+  - Test CRLF łapie też `i/mixed` i `w/mixed`. Powód: plik z liniami CRLF i LF naraz przechodził test. Mutacja: plik `mixed` w klonie daje FAIL nowego testu, stary test przechodzi.
+  - `[*.md]` bez `indent_size`. Powód: 243 linii list ma wcięcie 3 spacji pod `1.`, 92 linii 2 spacje pod `-`. Specyfikacja podawała tylko 2 spacje.
+- Pominięte jako LOW:
+  - Test powtarza wywołanie gita z `tests/support/tracked_files.py`.
+  - `.sh` i `.mmd` dostają tylko ustawienia z `[*]`.
+- Runda 2: 1 audytor jakości na całej gałęzi. Brak znalezisk powyżej LOW.

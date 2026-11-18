@@ -8,6 +8,7 @@ from pathlib import Path
 import pytest
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+CRLF = re.compile(r"\b[iw]/(crlf|mixed)\b")
 SECTION = re.compile(r"^\[(?P<glob>[^\]]+)\]\n(?P<body>.*?)(?=^\[|\Z)", re.MULTILINE | re.DOTALL)
 
 
@@ -40,7 +41,7 @@ def test_editorconfig_defaults_to_lf_utf8() -> None:
 @pytest.mark.parametrize(
     ("glob", "indent_size", "max_line_length"),
     [
-        ("*.md", "2", "off"),
+        ("*.md", None, "off"),
         ("*.py", "4", "100"),
         ("*.{yml,yaml}", "2", "off"),
         ("*.toml", "4", "off"),
@@ -48,11 +49,11 @@ def test_editorconfig_defaults_to_lf_utf8() -> None:
     ],
 )
 def test_editorconfig_sets_indent_per_file_type(
-    glob: str, indent_size: str, max_line_length: str
+    glob: str, indent_size: str | None, max_line_length: str
 ) -> None:
     section = _editorconfig()[glob]
     assert section["indent_style"] == "space"
-    assert section["indent_size"] == indent_size
+    assert section.get("indent_size") == indent_size
     assert section["max_line_length"] == max_line_length
 
 
@@ -79,5 +80,5 @@ def test_no_tracked_file_has_crlf() -> None:
         text=True,
         timeout=30,
     ).stdout
-    crlf = [line for line in listing.splitlines() if "crlf" in line.split("\t")[0]]
+    crlf = [line for line in listing.splitlines() if CRLF.search(line.split("\t")[0])]
     assert crlf == []

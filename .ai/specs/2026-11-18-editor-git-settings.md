@@ -25,7 +25,7 @@ Wartości wynikają z istniejącego kodu. Żadna nie jest decyzją opiekuna.
 | Wzorzec | Wcięcie | Długość linii | Źródło |
 |---|---|---|---|
 | `*` | — | — | wspólne: `charset = utf-8`, `end_of_line = lf`, `insert_final_newline = true`, `trim_trailing_whitespace = true` |
-| `*.md` | spacje, 2 | bez limitu | listy w repo mają wcięcie 2 spacji. Proza w jednej linii na akapit |
+| `*.md` | spacje, bez rozmiaru | bez limitu | listy pod `-` mają wcięcie 2 spacji, pod `1.` 3 spacje. Proza w jednej linii na akapit |
 | `*.py` | spacje, 4 | 100 | `[tool.ruff] line-length = 100` w `pyproject.toml` |
 | `*.{yml,yaml}` | spacje, 2 | bez limitu | `.github/workflows/ci.yml` |
 | `*.toml` | spacje, 4 | bez limitu | `pyproject.toml` |
@@ -33,6 +33,7 @@ Wartości wynikają z istniejącego kodu. Żadna nie jest decyzją opiekuna.
 
 - `trim_trailing_whitespace` zostaje `true` także dla Markdownu. Żaden plik `.md` nie używa dwóch spacji na końcu linii. Sprawdzone: `git grep -nE '[[:space:]]+$'` nie zwraca trafień.
 - Długość linii „bez limitu” to `max_line_length = off`.
+- `*.md` nie ma `indent_size`. W repo stoi 243 linii list z wcięciem 3 spacji i 92 z wcięciem 2. CommonMark wymaga 3 spacji pod `1.`. Jeden rozmiar złamałby zagnieżdżenie list numerowanych.
 - Odrzucona alternatywa: limit 100 znaków dla Markdownu. Akapity w repo są w jednej linii, limit złamałby niemal każdy plik.
 
 ### `.gitattributes`
@@ -52,7 +53,7 @@ Po istniejących 5 wpisach dochodzą `CLAUDE.local.md` i `.worktrees/`.
 - sekcje `.editorconfig` dla `*.md`, `*.py`, `*.{yml,yaml}`, `*.toml`, `*.json` i `max_line_length = 100` dla `*.py`;
 - reguły `* text=auto eol=lf` i `*.png binary` w `.gitattributes`;
 - wpisy `CLAUDE.local.md` i `.worktrees/` w `.gitignore`;
-- brak plików z CRLF według `git ls-files --eol`.
+- brak plików z CRLF według `git ls-files --eol`. Plik z liniami CRLF i LF naraz git oznacza `mixed`, test łapie oba.
 
 ## Plan
 1. Test `tests/test_repo_settings.py` pada na brak plików. Sprawdza `uv run pytest tests/test_repo_settings.py`.
