@@ -2,7 +2,7 @@
 
 Issue: #5
 
-Plan: [`.ai/specs/2026-11-18-setup-delete-extra-labels-plan.md`](../specs/2026-11-18-setup-delete-extra-labels-plan.md)
+Plan: [`.ai/specs/implemented/2026-11-18-setup-delete-extra-labels-plan.md`](../specs/implemented/2026-11-18-setup-delete-extra-labels-plan.md)
 
 ## Postęp
 
@@ -58,3 +58,9 @@ Plan: [`.ai/specs/2026-11-18-setup-delete-extra-labels-plan.md`](../specs/2026-1
   - Dziennik ma liczby po rundzie 3 i mutację testu pozycji ostrzeżenia.
 - Bramka po rundzie 4: 91 PASS, `ruff` czysty.
 - Commit autosave cezara wciągnął `.claude/scratch/`. Commit był tylko lokalny, cofnięty. `.claude/scratch/` dopisany do lokalnego `info/exclude`.
+
+## Wysyłka
+
+- Operator wybrał push i PR po rundzie 4.
+- Specyfikacja i plan przeniesione do `.ai/specs/implemented/`.
+- Follow-up: issue #7, ignorowanie `.claude/scratch/` w `ba-ship-pr`.
