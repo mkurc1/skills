@@ -61,17 +61,17 @@ Etykiety skill wskazuje nazwą logiczną, na przykład `<etykieta zablokowanego 
 Zanim cokolwiek dotknie plików, zapisz stan sprzed automatycznych edycji:
 
 ```bash
-mkdir -p .claude/scratch/reviews
+mkdir -p .ai/scratch/reviews
 git fetch origin main -q                          # świeży origin/main, inaczej merge-base cofa się za daleko
 base=$(git merge-base origin/main HEAD)
 sha=$(git rev-parse --short HEAD)
-snap=".claude/scratch/reviews/pre-ship-pr-$sha-$(date +%H%M%S).patch"
+snap=".ai/scratch/reviews/pre-ship-pr-$sha-$(date +%H%M%S).patch"
 ita=$(git ls-files --others --exclude-standard)   # co było nieśledzone PRZED
 git add -A -N                                     # intent-to-add: nowe pliki wejdą do diffa
 test -e "$snap" || git diff --binary "$base" > "$snap"
 # zdejmij znaczniki i-t-a — indeks musi wrócić do stanu sprzed tego bloku
 [ -n "$ita" ] && printf '%s\n' "$ita" | tr '\n' '\0' | xargs -0 git rm --cached -q --
-echo "$sha $base $snap" >> .claude/scratch/reviews/pre-ship-pr-index.txt
+echo "$sha $base $snap" >> .ai/scratch/reviews/pre-ship-pr-index.txt
 echo "punkt odniesienia: $snap (base $base)"
 ```
 
@@ -215,7 +215,7 @@ Pętla nie pyta użytkownika o kierunek poprawki. Rozstrzyga sama i zapisuje dec
 
 Raporty audytorów zapisuje **orkiestrator** z tekstu zwróconego przez subagentów. Sami audytorzy tego nie zrobią — żaden z pięciu agentów używanych w tej fazie nie ma narzędzia `Write`.
 
-Miejsce zapisu: `.claude/scratch/reviews/`. Katalog jest w `.gitignore`, więc raporty nie wejdą do commita niezależnie od tego, którą ścieżką skończy się pętla.
+Miejsce zapisu: `.ai/scratch/reviews/`. Katalog `.ai/scratch/` jest w `.gitignore`, więc raporty nie wejdą do commita niezależnie od tego, którą ścieżką skończy się pętla. Wpis w `.gitignore` dodaje skill `ba-setup`.
 
 **Nie kieruj ich do `docs/reviews/`.** Ten katalog nie jest ignorowany, a Faza 2 ma wyjścia awaryjne (czerwony gate, wyczerpane rundy, STOP z 2.6), które nigdy nie docierają do sprzątania w Fazie 3.
 
@@ -242,7 +242,7 @@ test -d docs/superpowers && rm -rf docs/superpowers/ && echo "deleted docs/super
 
 **Reguła:** jeśli użytkownik chce zachować coś innego z `docs/reviews/` lub `docs/superpowers/` — powinien commitować to zanim wywoła skill. Skill ratuje tylko specyfikacje i plany.
 
-Ta faza idzie **za** pętlą review. Raporty z Fazy 2 żyją w `.claude/scratch/reviews/` i nie zależą od tego sprzątania — `docs/reviews/` kasujemy tu dlatego, że zapisuje tam komenda `/code-review:review`, gdy użytkownik odpali ją osobno.
+Ta faza idzie **za** pętlą review. Raporty z Fazy 2 żyją w `.ai/scratch/reviews/` i nie zależą od tego sprzątania — `docs/reviews/` kasujemy tu dlatego, że zapisuje tam komenda `/code-review:review`, gdy użytkownik odpali ją osobno.
 
 ## Faza 4 — Commit + push
 
