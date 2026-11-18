@@ -3,7 +3,7 @@
 Ten plik pokazuje drogę zadania od issue do PR-a zmergowanego do `main`. Mówi, kto prowadzi każdy etap i kiedy etap się kończy.
 
 - Zadania i PR-y żyją w GitHubie. Repozytorium podaje [`project.md`](../config/project.md#repozytorium).
-- Repo nie ma pliku z regułami pracy agenta. Reguły procesu stoją w tym pliku i w `.ai/config/`.
+- Reguły pracy agenta stoją w [`AGENTS.md`](../../AGENTS.md). Ten plik ich nie powtarza.
 - Wartości projektu stoją w `.ai/config/`. Ten plik do nich linkuje.
 - Nowe repo dostaje `.ai/config/` i ten plik ze skilla `ba-setup`.
 

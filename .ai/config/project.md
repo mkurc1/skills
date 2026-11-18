@@ -83,7 +83,7 @@ Przeczytaj, zanim dotkniesz kodu i zanim zadasz pytanie:
 - test z `tests/`, który pilnuje kontraktu zmienianego skilla albo szablonu `ba-setup`;
 - specyfikację z `.ai/specs/` i pasujące lekcje, gdy repo je prowadzi.
 
-Repo nie ma pliku z regułami pracy agenta (`AGENTS.md`, `CLAUDE.md`). Reguły procesu stoją w `.ai/docs/sdlc.md`.
+Reguły pracy agenta stoją w `AGENTS.md`. Reguły procesu stoją w `.ai/docs/sdlc.md`.
 
 ## Dobór skilli
 
