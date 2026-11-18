@@ -2,7 +2,7 @@
 
 Issue: #10
 
-Plan: [`.ai/specs/2026-11-18-mit-license-plan.md`](../specs/2026-11-18-mit-license-plan.md)
+Plan: [`.ai/specs/implemented/2026-11-18-mit-license-plan.md`](../specs/implemented/2026-11-18-mit-license-plan.md)
 
 ## Postęp
 
@@ -25,3 +25,9 @@ Plan: [`.ai/specs/2026-11-18-mit-license-plan.md`](../specs/2026-11-18-mit-licen
 ## Po merge
 
 - `gh api repos/mkurc1/skills --jq .license.spdx_id` ma zwrócić `MIT`.
+
+## Wysyłka
+
+- ba-ship-pr: bramka zielona, lokalne review (security, quality, docs) bez znalezisk powyżej LOW w rundzie 1.
+- LOW, świadomie pominięte: `tests/test_license.py` sprawdza 3 wiersze `LICENSE`, nie cały tekst. Pełny tekst sprawdził `diff` z `gh api licenses/mit`.
+- Specyfikacja i plan przeniesione do `.ai/specs/implemented/`.
