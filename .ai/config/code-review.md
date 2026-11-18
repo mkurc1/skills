@@ -7,7 +7,7 @@ Czytają go:
 - lokalna pętla review w skillu `ba-ship-pr`;
 - recenzent PR-a.
 
-Repo nie ma pliku z regułami pracy agenta. Źródłem reguł są `.ai/config/` i testy kontraktów w `tests/`. Ten plik zamienia je na pytania do diffu.
+Źródłem reguł jest `AGENTS.md`, razem z `.ai/config/` i testami kontraktów w `tests/`. Ten plik zamienia je na pytania do diffu.
 
 ## Wagi uwag
 

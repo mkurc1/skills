@@ -11,6 +11,7 @@ Agent, który zmienia to repo, dostaje reguły pracy w jednym pliku `AGENTS.md`.
 - Nowy `AGENTS.md` w katalogu głównym, po polsku, w stylu `.ai/config/`.
 - Nowy `CLAUDE.md` w katalogu głównym z importem `@AGENTS.md`.
 - Zdanie „Repo nie ma pliku z regułami pracy agenta” w `.ai/config/project.md` § Dokumentacja przed pracą i w `.ai/docs/sdlc.md` zastąpione odesłaniem do `AGENTS.md`.
+- To samo zdanie w `.ai/config/code-review.md:10`. Issue go nie wymienia. Znalezione przy implementacji: po zmianie zdanie byłoby fałszywe.
 - Nowy test `tests/test_agents_md.py`.
 
 ### Poza zakresem

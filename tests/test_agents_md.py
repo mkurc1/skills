@@ -9,6 +9,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 AGENTS_MD = REPO_ROOT / "AGENTS.md"
 CLAUDE_MD = REPO_ROOT / "CLAUDE.md"
 CONFIG_FILES = [
+    REPO_ROOT / ".ai/config/code-review.md",
     REPO_ROOT / ".ai/config/project.md",
     REPO_ROOT / ".ai/docs/sdlc.md",
 ]
